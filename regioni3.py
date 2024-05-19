@@ -22,8 +22,9 @@ def search():
 
 @app.route('/info', methods = ['GET'])
 def info():
-    id = int(request.args['id'])
-    risultato = dati_regioni.iloc[[id]]
+    id = request.args.getlist('id')
+    id = [int(i) for i in id]
+    risultato = dati_regioni.iloc[id]
     if len(risultato) == 0:
         table = 'Regione non trovata'
     else:
